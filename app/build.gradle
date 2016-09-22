@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+
+
 android {
     testOptions {
         unitTests.returnDefaultValues = true
@@ -9,7 +11,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "io.rapidpro.surveyor"
+        applicationId "com.ilhapush.push"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 21
@@ -28,6 +30,10 @@ android {
     }
     dexOptions {
         javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
     }
 }
 
