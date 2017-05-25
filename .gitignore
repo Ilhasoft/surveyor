@@ -3,5 +3,6 @@ build/
 .gradle
 local.properties
 *.iml
+*.apk
 gradle-app.setting
 .DS_STORE
