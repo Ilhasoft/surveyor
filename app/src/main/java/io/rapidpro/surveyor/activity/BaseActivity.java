@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -126,6 +127,7 @@ public class BaseActivity extends PermisoActivity {
 
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 
         // check if they are properly logged in
