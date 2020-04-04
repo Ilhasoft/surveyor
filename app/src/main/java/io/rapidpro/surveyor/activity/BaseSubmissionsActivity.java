@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.List;
 
 import io.rapidpro.surveyor.R;
@@ -26,21 +25,12 @@ public abstract class BaseSubmissionsActivity extends BaseActivity {
      * @param view the button
      */
     public void onActionSubmit(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.confirm_send_submissions))
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        doSubmit();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                })
-                .show();
+        showConfirmDialog(R.string.confirm_send_submissions, new ConfirmationListener() {
+            @Override
+            public void onConfirm() {
+                doSubmit();
+            }
+        });
     }
 
     /**
@@ -78,15 +68,10 @@ public abstract class BaseSubmissionsActivity extends BaseActivity {
             }
         });
 
-        task.setUsername(getUsername());
-        task.setLegacyToken(getOrg().getToken());
-        task.includeLegacySubmissions(getLegacySubmissions());
         task.execute(asArray);
     }
 
     protected abstract List<Submission> getPendingSubmissions();
-
-    protected abstract List<File> getLegacySubmissions();
 
     protected abstract Org getOrg();
 

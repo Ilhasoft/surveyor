@@ -32,23 +32,16 @@ public class EngineTest extends BaseApplicationTest {
 
     @Test
     public void currentSpecVersion() {
-        assertThat(Engine.currentSpecVersion(), is(new Semver("13.0.0")));
+        assertThat(Engine.currentSpecVersion(), is(new Semver("13.1.0")));
     }
 
     @Test
     public void isSpecVersionSupported() {
-        assertThat(Engine.isSpecVersionSupported("12.0"), is(false));
+        assertThat(Engine.isSpecVersionSupported("10.0"), is(false));
+        assertThat(Engine.isSpecVersionSupported("11.0"), is(true));
         assertThat(Engine.isSpecVersionSupported("13.0"), is(true));
         assertThat(Engine.isSpecVersionSupported("13.5"), is(true));
         assertThat(Engine.isSpecVersionSupported("14.0"), is(false));
-    }
-
-    @Test
-    public void migrateLegacyDefinition() {
-        String legacyFlow = "{\"action_sets\":[],\"rule_sets\":[],\"base_language\":\"eng\",\"metadata\":{\"uuid\":\"061be894-4507-470c-a20b-34273bf915be\",\"name\":\"Survey\"}}";
-        String migrated = Engine.migrateLegacyDefinition(legacyFlow);
-
-        assertThat(migrated, is("{\"uuid\":\"061be894-4507-470c-a20b-34273bf915be\",\"name\":\"Survey\",\"spec_version\":\"13.0.0\",\"language\":\"eng\",\"type\":\"\",\"revision\":0,\"expire_after_minutes\":0,\"localization\":{},\"nodes\":[],\"_ui\":{\"nodes\":{},\"stickies\":{}}}"));
     }
 
     @Test(expected = EngineException.class)
@@ -97,7 +90,7 @@ public class EngineTest extends BaseApplicationTest {
 
         // try to marshal to JSON
         String marshaled = session.toJSON();
-        assertThat(marshaled.substring(0, 50), is("{\"type\":\"messaging_offline\",\"environment\":{\"date_f"));
+        assertThat(marshaled.substring(0, 9), is("{\"uuid\":\""));
 
         // and unmarshal back
         Session session2 = Engine.getInstance().readSession(session.getAssets(), marshaled);

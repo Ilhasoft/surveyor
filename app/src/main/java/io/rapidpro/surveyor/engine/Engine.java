@@ -41,21 +41,7 @@ public class Engine {
      * Creates a new engine
      */
     private Engine() {
-        this.target = new com.nyaruka.goflow.mobile.Engine(null);
-    }
-
-    /**
-     * Migrates a legacy flow definition to the new engine format
-     *
-     * @param definition the legacy definition
-     * @return the new definition
-     */
-    public static String migrateLegacyDefinition(String definition) {
-        try {
-            return Mobile.migrateLegacyDefinition(definition);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        this.target = new com.nyaruka.goflow.mobile.Engine();
     }
 
     /**
@@ -74,7 +60,12 @@ public class Engine {
      * @return true if supported
      */
     public static boolean isSpecVersionSupported(String ver) {
-        return Mobile.isSpecVersionSupported(ver);
+        // for a while Surveyor was creating v12 flows which don't exist anywhere else
+        if (ver.startsWith("12.")) {
+            return false;
+        }
+
+        return Mobile.isVersionSupported(ver);
     }
 
     /**
