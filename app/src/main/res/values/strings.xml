@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Surveyor</string>
-    <string name="support_email">support@ilhasoft.com.br</string>
+    <string name="support_email">support@rapidpro.io</string>
 
     <!-- activity titles -->
     <string name="title_activity_login">Sign in</string>
