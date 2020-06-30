@@ -6,3 +6,4 @@ local.properties
 *.iml
 gradle-app.setting
 .DS_STORE
+google-services.json
