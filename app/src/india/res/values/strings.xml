@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ilhasoft Surveyor- RTM India</string>
+    <string name="app_name">RTM India Surveyor</string>
     <string name="support_email">support@ilhasoft.com.br</string>
     <string name="pref_default_host">https://rapidpro.ilhasoft.in</string>
 </resources>
